@@ -34,11 +34,12 @@ t_hash				*hashtable_create(size_t max_size,
 **
 **	PARAMETERS:
 **	- hash: the hash table reference. (see `hashtable_create`)
+**	- key: the hash key to be used, in form of a string.
 **	- data: the data to add to the hash table, in form of a pointer.
 **
 **	RETURN VALUES:
 **	- (0) in case of success.
-**	- (1) if the data is a duplicate (it will not be added).
+**	- (1) if the key is a duplicate (it will not be added).
 **	- (-1) in case of a bad alloc.
 */
 int					hashtable_push(t_hash *hash, const char *key, void *data);
@@ -48,7 +49,8 @@ int					hashtable_push(t_hash *hash, const char *key, void *data);
 **
 **	PARAMETERS:
 **	- hash: the hash table reference. (see `hashtable_create`)
-**	- data: the data to remove from the hash table, in form of a pointer.
+**	- key: the key of the element to remove from the hash table,
+**		in form of a pointer.
 **
 **	RETURN VALUES:
 **	- true if the element has been deleted.

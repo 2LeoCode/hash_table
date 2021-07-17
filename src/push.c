@@ -1,6 +1,6 @@
 #include <hash_internals.h>
 
-int	hashtable_push(t_hash *hash, char *key, void *data)
+int	hashtable_push(t_hash *hash, const char *key, void *data)
 {
 	const unsigned int	hash_index = hash->hash_fun(data);
 

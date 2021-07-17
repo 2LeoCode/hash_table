@@ -7,6 +7,7 @@ typedef struct s_node	t_node;
 
 struct	s_node
 {
+	char	*key;
 	void	*data;
 	void	(*destructor)();
 	t_node	*next;
@@ -14,7 +15,6 @@ struct	s_node
 
 typedef struct s_list
 {
-	char	*key;
 	t_node	*head;
 	size_t	size;
 }	t_list;

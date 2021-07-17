@@ -27,8 +27,9 @@ typedef struct s_hash	t_hash;
 **		used for other functions.
 **	- NULL in case of bad alloc.
 */
-t_hash				*hashtable_create(size_t max_size, unsigned int (*hash_fun)(char *),
-					int (*cmp_fun)(const char *, const char *), void (*free_fun)());
+t_hash				*hashtable_create(size_t max_size,
+						unsigned int (*hash_fun)(const char *),
+						void (*free_fun)());
 
 /*
 **	The `hashtable_push` function adds a new element to a hash table.
@@ -42,7 +43,7 @@ t_hash				*hashtable_create(size_t max_size, unsigned int (*hash_fun)(char *),
 **	- (1) if the data is a duplicate (it will not be added).
 **	- (-1) in case of a bad alloc.
 */
-int					hashtable_push(t_hash *hash, char *key, void *data);
+int					hashtable_push(t_hash *hash, const char *key, void *data);
 
 /*
 **	The `hashtable_pop` function removes an element from a hash table.
@@ -55,7 +56,7 @@ int					hashtable_push(t_hash *hash, char *key, void *data);
 **	- true if the element has been deleted.
 **	- false if the element hasn't been found.
 */
-bool				hashtable_pop(t_hash *hash, void *data);
+bool				hashtable_pop(t_hash *hash, const char *key);
 
 /*
 **	The `hashtable_lookup` looks for the index of an element in the hash table
@@ -68,7 +69,7 @@ bool				hashtable_pop(t_hash *hash, void *data);
 **	The index of the data inside the hash table, in form of an unsigned
 **	integer.
 */
-unsigned int		hashtable_lookup(t_hash *hash, void *data);
+unsigned int		hashtable_lookup(t_hash *hash, const char *key);
 
 /*
 **	The `hashtable_destroy` frees the memory allocated with `malloc` to create

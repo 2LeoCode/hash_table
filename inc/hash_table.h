@@ -63,11 +63,10 @@ bool				hashtable_pop(t_hash *hash, const char *key);
 **
 **	PARAMETERS:
 **	- hash: the hash table reference. (see `hashtable_create`)
-**	- data: the data to look for.
+**	- key: the hash key of the data to look for.
 **
 **	RETURN VALUES:
-**	The index of the data inside the hash table, in form of an unsigned
-**	integer.
+**	A pointer to the data corresponding to the hash key.
 */
 unsigned int		hashtable_lookup(t_hash *hash, const char *key);
 
@@ -77,6 +76,7 @@ unsigned int		hashtable_lookup(t_hash *hash, const char *key);
 **
 **	PARAMETERS:
 **	- hash: the hash table reference. (see `hashtable_create`)
+**	- key: the key of the element to look for.
 */
 void				hashtable_destroy(t_hash *hash);
 

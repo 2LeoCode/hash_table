@@ -49,8 +49,7 @@ int					hashtable_push(t_hash *hash, const char *key, void *data);
 **
 **	PARAMETERS:
 **	- hash: the hash table reference. (see `hashtable_create`)
-**	- key: the key of the element to remove from the hash table,
-**		in form of a pointer.
+**	- key: the hash key of the element to remove from the table.
 **
 **	RETURN VALUES:
 **	- true if the element has been deleted.
@@ -76,7 +75,6 @@ unsigned int		hashtable_lookup(t_hash *hash, const char *key);
 **
 **	PARAMETERS:
 **	- hash: the hash table reference. (see `hashtable_create`)
-**	- key: the key of the element to look for.
 */
 void				hashtable_destroy(t_hash *hash);
 

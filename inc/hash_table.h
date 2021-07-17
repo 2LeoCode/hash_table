@@ -15,12 +15,10 @@ typedef struct s_hash	t_hash;
 **	- max_size: the size of the new hash table.
 **	- hash_fun: your custom hash function, the function needs to take a char
 **		pointer and return an unsigned integer.
-**	- cmp_fun: your custom function to compare the keys, the function needs
-**		to take two const char pointers and return a signed integer.
 **	- free_fun: your function to free the data, the function needs to take
 **		one pointer to be freed, it can be for example `free`, from <stdlib.h>
 **		(for a pointer allocated with `malloc`).
-**		If set to NULL, it will not free the data at `hashtable_destroy` call.
+**		If set to NULL, `hashtable_destroy` will not free the data.
 **
 **	RETURN VALUES:
 **	- An opaque t_hash pointer, the reference to the hash table that will be

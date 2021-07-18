@@ -3,16 +3,16 @@
 bool	lst_pop(t_list *lst_ptr, const char *key)
 {
 	t_node	*it;
-	t_node	*tmp;
+	t_node	*prev;
 
 	it = lst_ptr->head;
-	tmp = NULL;
+	prev = NULL;
 	while (it)
 	{
 		if (!ft_strcmp(key, it->key))
 		{
-			if (tmp)
-				tmp->next = it->next;
+			if (prev)
+				prev->next = it->next;
 			else
 				lst_ptr->head = it->next;
 			if (it->destructor)
@@ -22,7 +22,7 @@ bool	lst_pop(t_list *lst_ptr, const char *key)
 			lst_ptr->size--;
 			return (true);
 		}
-		tmp = it;
+		prev = it;
 		it = it->next;
 	}
 	return (false);

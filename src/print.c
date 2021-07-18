@@ -20,6 +20,9 @@ int	hashtable_print(t_hash *hash, int (*print_fun)(), int fd, size_t size)
 		{
 			while (it)
 			{
+				write(1, "[\'", 2);
+				write(1, it->key, ft_strlen(it->key));
+				write(1, "\'=\'", 3);
 				if (fd >= 0 && size != SIZE_MAX)
 					(*print_fun)(fd, it->data, size);
 				else if (fd >= 0)
@@ -28,6 +31,7 @@ int	hashtable_print(t_hash *hash, int (*print_fun)(), int fd, size_t size)
 					(*print_fun)(it->data, size);
 				else
 					(*print_fun)(it->data);
+				write(1, "\']", 2);
 				it = it->next;
 				if (it)
 					tmp = write(wfd, ", ", 2);

@@ -6,5 +6,5 @@ size_t	ft_strlen(const char *s)
 
 	while (*ptr)
 		ptr++;
-	return ((size_t)ptr - (size_t)s);
+	return ((uintptr_t)ptr - (uintptr_t)s);
 }

@@ -4,7 +4,6 @@
 # include <stdint.h>
 # include <stddef.h>
 # include <stdbool.h>
-# include <errno.h>
 
 typedef struct s_hash	t_hash;
 
@@ -25,7 +24,7 @@ typedef struct s_hash	t_hash;
 **		used for other functions.
 **	- NULL in case of bad alloc.
 */
-t_hash				*hashtable_create(size_t max_size,
+t_hash	*hashtable_create(size_t max_size,
 						unsigned int (*hash_fun)(const char *),
 						void (*free_fun)());
 
@@ -42,7 +41,7 @@ t_hash				*hashtable_create(size_t max_size,
 **	- (1) if the key is a duplicate (it will not be added).
 **	- (-1) in case of a bad alloc.
 */
-int					hashtable_push(t_hash *hash, const char *key, void *data);
+int		hashtable_push(t_hash *hash, const char *key, void *data);
 
 /*
 **	The `hashtable_pop` function removes an element from a hash table.
@@ -55,7 +54,7 @@ int					hashtable_push(t_hash *hash, const char *key, void *data);
 **	- true if the element has been deleted.
 **	- false if the element hasn't been found.
 */
-bool				hashtable_pop(t_hash *hash, const char *key);
+bool	hashtable_pop(t_hash *hash, const char *key);
 
 /*
 **	The `hashtable_lookup` looks for the index of an element in the hash table
@@ -65,9 +64,10 @@ bool				hashtable_pop(t_hash *hash, const char *key);
 **	- key: the hash key of the data to look for.
 **
 **	RETURN VALUES:
-**	A pointer to the data corresponding to the hash key.
+**	- A pointer to the data corresponding to the hash key.
+**	- NULL if nothing was found
 */
-unsigned int		hashtable_lookup(t_hash *hash, const char *key);
+void	*hashtable_lookup(t_hash *hash, const char *key);
 
 /*
 **	The `hashtable_destroy` frees the memory allocated with `malloc` to create
@@ -76,7 +76,7 @@ unsigned int		hashtable_lookup(t_hash *hash, const char *key);
 **	PARAMETERS:
 **	- hash: the hash table reference. (see `hashtable_create`)
 */
-void				hashtable_destroy(t_hash *hash);
+void	hashtable_destroy(t_hash *hash);
 
 /*
 **	The `hashtable_print` is to be used as debug purposes only,
@@ -100,5 +100,5 @@ void				hashtable_destroy(t_hash *hash);
 **	- (a non-negative value between 0 and `size`) in case of success.
 **	- (-1) in case of failure.
 */
-int					hashtable_print(t_hash *hash, int (*print_fun)(), int fd, size_t size);
+int		hashtable_print(t_hash *hash, int (*print_fun)(), int fd, size_t size);
 #endif

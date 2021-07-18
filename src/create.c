@@ -11,8 +11,8 @@ t_hash	*hashtable_create(size_t max_size, unsigned int (*hash_fun)(const char *)
 	new_hashtable->max_size = max_size;
 	new_hashtable->hash_fun = hash_fun;
 	new_hashtable->free_fun = free_fun;
-	new_hashtable->begin = ft_calloc(max_size, sizeof(t_hashnode));
-	if (new_hashtable->begin)
+	new_hashtable->data = ft_calloc(max_size, sizeof(t_list));
+	if (new_hashtable->data)
 		return (new_hashtable);
 	free(new_hashtable);
 	return (NULL);

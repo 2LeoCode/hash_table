@@ -1,6 +1,6 @@
 OS =		$(shell uname)
 SHELL =		/bin/sh
-NAME =		
+NAME =		libht.a
 
 .SUFFIXES =	.c .o .h .a .dylib
 
@@ -10,12 +10,31 @@ LIBDIR =	lib
 
 OBJDIR =	.obj
 OBJFOLD =	$(addprefix $(OBJDIR)/,\
-			)
+				list\
+				utils)
 
 SRC =		$(addsuffix $(word 1, $(.SUFFIXES)),\
-			main)
+				$(addprefix list/lst_,\
+					destroy\
+					find\
+					pop\
+					push)\
+				$(addprefix utils/,\
+					bzero\
+					calloc\
+					strcpy\
+					strdup\
+					strlen\
+					strcmp)\
+				create\
+				destroy\
+				lookup\
+				pop\
+				push\
+				print)
 INC =		$(addsuffix $(word 3, $(.SUFFIXES)),\
-			)
+				hash_internals\
+				hash_table)
 LIB =		
 DLIB =		
 LIBNAME =	$(foreach lib, $(LIB),\
@@ -30,7 +49,7 @@ OBJ =		$(addprefix $(OBJDIR)/,\
 				$(SRC:$(word 1, $(.SUFFIXES))=$(word 2, $(.SUFFIXES))))
 
 CC =		gcc
-CFLAGS =	-Wall -Wextra -Werror -I $(INCDIR) -fsanitize=address -g3
+CFLAGS =	-Wall -Wextra -Werror -I $(INCDIR) #-fsanitize=address -g3
 LCFLAGS =	-L . $(addprefix -l, $(LIB:lib%=%) $(DLIB:lib%=%))
 
 ifeq ($(OS), Darwin)
@@ -43,7 +62,7 @@ ifeq ($(OS), Darwin)
 	KCYN =		\x1B[36m
 	KWHT =		\x1B[37m
 else
-	KNRM =		\e[39mk/
+	KNRM =		\e[39m
 	KRED =		\e[31m
 	KGRN =		\e[32m
 	KYEL =		\e[33m
@@ -77,12 +96,13 @@ $(OBJFOLD):
 
 $(NAME): $(OBJ)
 	@printf "$(KCYN)[  Linking  ]\n➤ "
-	$(CC) $(CFLAGS) $^ -o $@ $(LCFLAGS)
+	ranlib $@
 	@printf "$(KNRM)"
 
 $(OBJDIR)/%$(word 2, $(.SUFFIXES)): $(SRCDIR)/%$(word 1, $(.SUFFIXES)) $(addprefix $(INCDIR)/, $(INC))
 	@printf "$(KMAG)[  Compiling  ]\n➤ "
 	$(CC) $(CFLAGS) -c $< -o $@
+	ar rc $(NAME) $@
 	@printf "$(KNRM)"
 
 clean:
